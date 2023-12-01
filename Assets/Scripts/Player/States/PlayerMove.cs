@@ -6,14 +6,20 @@ public class PlayerMove : PlayerState
 {
     public override void StartState()
     {
-        Debug.Log("Player is moving! Yay!");
+        
     }
 
     public override void UpdateState()
     {
         if (controller.player.inputMove.magnitude > 0)
         {
-            controller.rb.AddForce(controller.player.inputMove * (controller.player.inputRun ? controller.RunSpeed : controller.WalkSpeed));
+            float max_speed = (controller.player.inputRun ? controller.RunSpeed : controller.WalkSpeed);
+            if (controller.rb.velocity.sqrMagnitude <= max_speed)
+            {
+                Vector3 direction = controller.cam.transform.TransformDirection(controller.player.inputMove);
+                direction.y = 0;
+                controller.rb.AddForce(direction * controller.Acceleration, ForceMode.VelocityChange);
+            }
         }
         else
         {

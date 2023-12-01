@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [Header("Player Movement")]
     public float WalkSpeed;
     public float RunSpeed;
+    public float Acceleration;
 
     [Header("Components")]
     public Player player;
