@@ -17,8 +17,6 @@ public class PlayerController : MonoBehaviour
     public Player player;
     public PlayerStateMachine stateMachine;
 
-    public PlayerInput input;
-
     public Collider col;
     public Rigidbody rb;
     public MeshRenderer mr;
@@ -30,8 +28,6 @@ public class PlayerController : MonoBehaviour
         // Initialising all components
         player = GetComponent<Player>();
         stateMachine = GetComponent<PlayerStateMachine>();
-
-        input = GetComponent<PlayerInput>();
 
         col = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
