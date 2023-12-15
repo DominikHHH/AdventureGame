@@ -31,9 +31,20 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdateInputs();
+    }
+
+    private void FixedUpdate()
+    {
+        
+    }
+
+    private void UpdateInputs()
+    {
         Vector2 vector2 = inputs.FindAction("Move").ReadValue<Vector2>();
         inputMove = new Vector3(vector2.x, 0, vector2.y);
 
         inputRun = inputs.FindAction("Run").IsPressed();
     }
+
 }

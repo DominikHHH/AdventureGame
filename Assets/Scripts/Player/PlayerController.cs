@@ -17,8 +17,8 @@ public class PlayerController : MonoBehaviour
     public Player player;
     public PlayerStateMachine stateMachine;
 
-    public Collider col;
-    public Rigidbody rb;
+    public CapsuleCollider col;
+    public CharacterController cc;
     public MeshRenderer mr;
 
     public Camera cam;
@@ -29,8 +29,8 @@ public class PlayerController : MonoBehaviour
         player = GetComponent<Player>();
         stateMachine = GetComponent<PlayerStateMachine>();
 
-        col = GetComponent<Collider>();
-        rb = GetComponent<Rigidbody>();
+        col = GetComponent<CapsuleCollider>();
+        cc = GetComponent<CharacterController>();
         mr = transform.GetChild(0).GetComponent<MeshRenderer>();
 
         cam = Camera.main;
