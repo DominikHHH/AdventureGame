@@ -6,14 +6,19 @@ public class PlayerIdle : PlayerState
 {
     public override void StartState()
     {
-        Debug.Log("Player is idle! Yay!");
+        
     }
 
     public override void UpdateState()
     {
-        if (controller.player.inputMove.magnitude <= 0)
+        if (player.moveInput == Vector3.zero)
         {
-            //Debug.Log("Idle");
+            if (player.moveAccel >= controller.Acceleration)
+            {
+                player.moveAccel -= controller.Acceleration;
+                controller.cc.Move(player.direction * player.moveAccel * Time.deltaTime);
+            }
+            else { player.moveAccel = 0; }
         }
         else
         {

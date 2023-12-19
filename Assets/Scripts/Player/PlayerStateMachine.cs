@@ -42,7 +42,7 @@ public class PlayerStateMachine : MonoBehaviour
         CurrentState.StartState();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         ExecuteState();
     }

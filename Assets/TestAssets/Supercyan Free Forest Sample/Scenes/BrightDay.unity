@@ -149,7 +149,7 @@ Transform:
   m_GameObject: {fileID: 87734396}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.92387956, z: -0.38268343, w: 0}
-  m_LocalPosition: {x: 61.440014, y: 8.076074, z: 67.471085}
+  m_LocalPosition: {x: 61.440014, y: 8.591072, z: 67.471085}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 284663426}
   - component: {fileID: 284663425}
   - component: {fileID: 284663424}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,7 +460,7 @@ GameObject:
   - component: {fileID: 420336564}
   - component: {fileID: 420336563}
   - component: {fileID: 420336562}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Stairs
   m_Icon: {fileID: 0}
@@ -546,13 +546,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 420336561}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.16793835, y: -0.45114616, z: 0.34074545, w: 0.807562}
+  m_LocalRotation: {x: -0.27059805, y: -0.6532815, z: 0.27059805, w: 0.6532815}
   m_LocalPosition: {x: 44.269, y: 0.82, z: 52.924}
   m_LocalScale: {x: 0.23192778, y: 7.267564, z: 2.5114}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 2.075, y: -57.528, z: 44.615}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 45}
 --- !u!1001 &571266634
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1131,9 +1131,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd985a0bc766d9b46966bdeba58487d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WalkSpeed: 1
-  RunSpeed: 2.5
-  Acceleration: 0.325
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  Gravity: 4
+  WalkSpeed: 3
+  RunSpeed: 6
+  Acceleration: 0.04
   player: {fileID: 0}
   stateMachine: {fileID: 0}
   col: {fileID: 0}
@@ -1149,7 +1153,7 @@ Transform:
   m_GameObject: {fileID: 845093695}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 61.44, y: 1.005, z: 60.4}
+  m_LocalPosition: {x: 61.44, y: 1.52, z: 60.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1191,8 +1195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43682246ebdeb35418707ce733016a45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputMove: {x: 0, y: 0, z: 0}
-  inputRun: 0
+  moveInput: {x: 0, y: 0, z: 0}
+  runInput: 0
   inputs:
     m_Name: Inputs
     m_Id: 05b632c3-9af7-4ca8-8d15-b0e822148553
@@ -1263,6 +1267,9 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Run
       m_Flags: 0
+  direction: {x: 0, y: 0, z: 0}
+  moveAccel: 0
+  gravityAccel: 0
 --- !u!114 &845093702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1321,7 +1328,7 @@ CharacterController:
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.5
-  m_SlopeLimit: 45
+  m_SlopeLimit: 55
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -1413,7 +1420,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.92387956, z: -0.38268343, w: 0}
-  m_LocalPosition: {x: 61.440014, y: 8.076074, z: 67.471085}
+  m_LocalPosition: {x: 61.440014, y: 8.591072, z: 67.471085}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

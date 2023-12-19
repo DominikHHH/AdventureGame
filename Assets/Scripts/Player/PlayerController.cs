@@ -6,9 +6,16 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    //*---------------------------------------------*
+    //
     //  A global script for tweaking player physics and for other objects to retreive info on other components more easily
-    
+    //
+    //*---------------------------------------------*
+
     [Header("Player Movement")]
+    public LayerMask GroundLayer;
+    public float Gravity;
+    [Space(10)]
     public float WalkSpeed;
     public float RunSpeed;
     public float Acceleration;
