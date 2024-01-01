@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [Header("Player Movement")]
     public LayerMask GroundLayer;
     public float Gravity;
+    public float GravityAccel;
     [Space(10)]
     public float WalkSpeed;
     public float RunSpeed;

@@ -13,11 +13,15 @@ public class PlayerMove : PlayerState
     {
         if (player.moveInput.magnitude > 0)
         {
+            // First, calculate the max speed the player can reach, determined by whether they are walking or running
             float max_speed = (player.runInput ? controller.RunSpeed : controller.WalkSpeed);
             player.moveAccel += controller.Acceleration;
             player.moveAccel = Mathf.Clamp(player.moveAccel, 0, max_speed);
 
-            controller.cc.Move(player.direction * player.moveAccel * Time.deltaTime);
+            // Then, rotate the player in their current movement
+            transform.LookAt(transform.position + player.direction, Vector3.up);
+
+            controller.cc.Move((transform.forward * player.moveAccel * Time.deltaTime) + player.movingPlatformSpeed);
         }
         else
         {

@@ -5,7 +5,11 @@ using UnityEngine;
 
 public class PlayerStateMachine : MonoBehaviour
 {
-    //      For changing between and updating the player's current state
+    //*---------------------------------------------*
+    //
+    //  A dedicated script for changing between and updating the player's current state
+    //
+    //*---------------------------------------------*    
 
     public PlayerState CurrentState;
 

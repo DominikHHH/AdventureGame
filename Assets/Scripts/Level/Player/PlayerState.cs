@@ -4,7 +4,11 @@ using UnityEngine;
 
 public abstract class PlayerState : MonoBehaviour
 {
-    //      Template class for all of the different states the player can be in
+    //*---------------------------------------------*
+    //
+    //  A template class for all of the different states the player can be in
+    //
+    //*---------------------------------------------*       
 
     protected PlayerController controller;
     protected Player player;
