@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 6461126357758222555}
   - component: {fileID: 6626282669718636101}
   - component: {fileID: 580654015549377890}
+  - component: {fileID: 859553152058693387}
+  - component: {fileID: 8985288252815644115}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -59,12 +61,19 @@ MonoBehaviour:
   WalkSpeed: 3
   RunSpeed: 6
   Acceleration: 0.04
+  JumpHeight: 8.5
+  JumpTimer: 0.175
+  CameraRotateSpeed: 75
   player: {fileID: 0}
   stateMachine: {fileID: 0}
   col: {fileID: 0}
-  cc: {fileID: 0}
+  charCon: {fileID: 0}
   mr: {fileID: 0}
   cam: {fileID: 0}
+  virtualCam: {fileID: 0}
+  virtualCamNoDamp: {fileID: 0}
+  camCon: {fileID: 0}
+  lm: {fileID: 0}
 --- !u!114 &3766025004680189413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,6 +88,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveInput: {x: 0, y: 0, z: 0}
   runInput: 0
+  jumpInput: 0
+  camRotInputLeft: 0
+  camRotInputRight: 0
   inputs:
     m_Name: Inputs
     m_Id: 05b632c3-9af7-4ca8-8d15-b0e822148553
@@ -96,6 +108,30 @@ MonoBehaviour:
       m_Type: 1
       m_ExpectedControlType: Button
       m_Id: 7f4888f9-cd3c-4386-99a7-ad31dee61d09
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: Jump
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 2c5d036b-c6c5-42f9-a06d-6dde6112a8e7
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: CamRotateLeft
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: bf6d3d3a-d884-49db-b00a-ffddf99b7c7d
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: CamRotateRight
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 6988caf6-2c88-4c21-a061-fb21c44da3d1
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -149,9 +185,34 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Run
       m_Flags: 0
+    - m_Name: 
+      m_Id: 48d1aff7-b0f2-48d7-8a0e-6adb1a9afd15
+      m_Path: <Keyboard>/q
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: CamRotateLeft
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 50f77be7-054a-415d-b3f1-072af58969d7
+      m_Path: <Keyboard>/e
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: CamRotateRight
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 3626674a-fcd7-4ef9-8b90-eac10b0b3ea1
+      m_Path: <Keyboard>/space
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Jump
+      m_Flags: 0
   direction: {x: 0, y: 0, z: 0}
   moveAccel: 0
   currentGravity: 0
+  currentJumpTimer: 0
   movingPlatformSpeed: {x: 0, y: 0, z: 0}
 --- !u!114 &8231341351885294722
 MonoBehaviour:
@@ -166,6 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentState: {fileID: 0}
+  PreviousState: {fileID: 0}
 --- !u!143 &3471714132140832454
 CharacterController:
   m_ObjectHideFlags: 0
@@ -237,6 +299,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d1c208800e39524286210b758be7703, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &859553152058693387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5927403711281312377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a864ec5267a12646ae02b3737913968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8985288252815644115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5927403711281312377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e81e950bf637e41be4996f2bdd91d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6879999185100555594

@@ -20,16 +20,26 @@ public class PlayerController : MonoBehaviour
     public float WalkSpeed;
     public float RunSpeed;
     public float Acceleration;
+    [Space(10)]
+    public float JumpHeight;
+    public float JumpTimer;
+    [Space(10)]
+    public float CameraRotateSpeed;
 
     [Header("Components")]
     public Player player;
     public PlayerStateMachine stateMachine;
 
     public CapsuleCollider col;
-    public CharacterController cc;
+    public CharacterController charCon;
     public MeshRenderer mr;
 
     public Camera cam;
+    public CinemachineVirtualCamera virtualCam;
+    public CinemachineVirtualCamera virtualCamNoDamp;
+    public CameraController camCon;
+
+    public LevelManager lm;
 
     private void Awake()
     {
@@ -38,10 +48,15 @@ public class PlayerController : MonoBehaviour
         stateMachine = GetComponent<PlayerStateMachine>();
 
         col = GetComponent<CapsuleCollider>();
-        cc = GetComponent<CharacterController>();
+        charCon = GetComponent<CharacterController>();
         mr = transform.GetChild(0).GetComponent<MeshRenderer>();
 
         cam = Camera.main;
+        virtualCam = FindObjectOfType<CinemachineVirtualCamera>();
+        virtualCamNoDamp = virtualCam.GetComponentInChildren<CinemachineVirtualCamera>();
+        camCon = cam.GetComponent<CameraController>();
+
+        lm = FindAnyObjectByType<LevelManager>();
     }
 
     // Start is called before the first frame update

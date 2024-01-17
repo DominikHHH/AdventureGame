@@ -12,11 +12,13 @@ public class PlayerStateMachine : MonoBehaviour
     //*---------------------------------------------*    
 
     public PlayerState CurrentState;
+    public PlayerState PreviousState;
 
     private List<PlayerState> allStates = new List<PlayerState>();
 
     public void ChangeState(System.Type newState)
     {
+        PreviousState = CurrentState;
         CurrentState.ExitState();
         if (CurrentState = allStates.Find(x => x.GetType() == newState))
         {
@@ -24,7 +26,7 @@ public class PlayerStateMachine : MonoBehaviour
         }
         else
         {
-            Debug.Log("State transmission unsuccessful!");
+            Debug.LogError("State transition unsuccessful!");
         }
         
     }

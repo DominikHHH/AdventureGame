@@ -15,9 +15,21 @@ public class PlayerIdle : PlayerState
         if (player.moveInput == Vector3.zero)
         {
             if (player.moveAccel >= controller.Acceleration) { player.moveAccel -= controller.Acceleration; }
-            else  {  player.moveAccel = 0; }
+            else player.moveAccel = 0;
 
-            controller.cc.Move((player.direction * player.moveAccel * Time.deltaTime) + player.movingPlatformSpeed);
+            // Checking for jumping
+            if (controller.charCon.isGrounded)
+            {
+                if (player.jumpInput)
+                {
+                    controller.stateMachine.ChangeState(typeof(PlayerJump));
+                }
+            }
+
+            // Forwards and sideways movement respectively
+            controller.charCon.Move(transform.forward * player.direction.z * player.moveAccel * Time.deltaTime);
+            controller.charCon.Move(transform.right * player.direction.x * player.moveAccel * Time.deltaTime);
+            controller.charCon.Move(player.movingPlatformSpeed);
         }
         else
         {

@@ -16,18 +16,22 @@ public class Player : MonoBehaviour
     // Inputs
     [HideInInspector] public Vector3 moveInput;
     [HideInInspector] public bool runInput;
+    [HideInInspector] public bool jumpInput;
+    [HideInInspector] public bool camRotInputLeft;
+    [HideInInspector] public bool camRotInputRight;
 
     public InputActionMap inputs;
 
     // Player physics
     [HideInInspector] public Vector3 direction;
     [HideInInspector] public float moveAccel;
-    [HideInInspector] public float currentGravity;
+    public float currentGravity;
+    public float currentJumpTimer;
 
     public Vector3 movingPlatformSpeed;
 
     // Main components
-    PlayerController controller;
+    private PlayerController controller;
 
     private void Awake()
     {
@@ -44,58 +48,76 @@ public class Player : MonoBehaviour
         // Update basic physics mechanics and inputs, regardless of the player's current state
         HandleInputs();
 
-        
-        HandleDirection();
-    }
-
-    private void LateUpdate()
-    {
         HandleGravity();
+
+        HandleDirection();
+        HandleCamRotation();
+        HandleJumping();
     }
 
     // Move the player vertically depending on how much ground is below them right now
     private void HandleGravity()
     {
         RaycastHit[] groundCheck = Physics.RaycastAll(transform.position, Vector3.down, Mathf.Infinity, controller.GroundLayer);
-        if (groundCheck.Length <= 0) 
+
+        // Let the player naturally fall at all times
+        controller.charCon.Move(Vector3.down * (currentGravity * Time.deltaTime));
+        if (!controller.charCon.isGrounded)
         {
-            // Let the player fall if there is no object below them at all
-            if (currentGravity <= controller.Gravity) { currentGravity += controller.GravityAccel; }
-            controller.cc.Move(Vector3.down * currentGravity * Time.deltaTime);
-        }
-        else
-        {
-            foreach (RaycastHit hit in groundCheck)
+            if (currentGravity <= controller.Gravity) 
             {
-                // Check to make sure the player is actively levitating above the ground right now before applying gravity
-                if (!controller.cc.isGrounded)
+                if (currentJumpTimer >= controller.JumpTimer || currentJumpTimer <= 0)
                 {
-                    if (currentGravity <= controller.Gravity) { currentGravity += controller.GravityAccel; }
-                    controller.cc.Move(Vector3.down * currentGravity * Time.deltaTime);
-                }
-                else
-                {
-                    switch (hit.collider.tag.ToString())
-                    {
-                        case "MovingPlatform":
-                            // Use additional speed to make sure the player stays on the current platform
-                            movingPlatformSpeed = hit.collider.GetComponent<MovingPlatform>().currentSpeed;
-                            break;
-
-                        case "Stairs":
-                            // Use lots of gravity to ensure the player is stuck to the ground
-                            controller.cc.Move(Vector3.down * 100 * Time.deltaTime);
-                            break;
-
-                        case "Untagged":
-                        default:
-                            currentGravity = 0;
-                            movingPlatformSpeed = Vector3.zero;
-                            break;
-                    }
+                    currentGravity += controller.GravityAccel;
                 }
             }
         }
+        
+        foreach (RaycastHit hit in groundCheck)
+        {
+            // Then, check for objects which might manipulate the player's position/gravity
+            bool exitLoop = false;
+            switch (hit.collider.tag.ToString())
+            {
+                case "MovingPlatform":
+                    // Use additional speed to make sure the player stays on the current platform
+                    if (controller.charCon.isGrounded)
+                    {
+                        movingPlatformSpeed = hit.collider.GetComponent<MovingPlatform>().currentSpeed;
+                        exitLoop = true;
+                    }
+                    break;
+
+                case "Stairs":
+                    // Use lots of gravity to ensure the player is stuck to the ground
+                    if (controller.charCon.isGrounded) { controller.charCon.Move(Vector3.down * 100 * Time.deltaTime); }
+                    break;
+
+                case "Untagged":
+                default:
+                    if (!exitLoop)
+                    {
+                        movingPlatformSpeed = Vector3.zero;
+                        if (controller.charCon.isGrounded) { currentGravity = 1; }
+                    }
+                    break;
+            }
+
+            if (exitLoop) break;
+        }
+    }
+
+    // Reading all of the player's current inputs and updating all associated variables
+    private void HandleInputs()
+    {
+        Vector2 vector2 = inputs.FindAction("Move").ReadValue<Vector2>();;
+        moveInput = new Vector3(-vector2.x, 0, -vector2.y);
+        runInput = inputs.FindAction("Run").IsPressed();
+
+        jumpInput = inputs.FindAction("Jump").IsPressed();
+
+        camRotInputLeft = inputs.FindAction("CamRotateLeft").IsPressed();
+        camRotInputRight = inputs.FindAction("CamRotateRight").IsPressed();
     }
 
     // Find the appropriate direction vector for the player to move in
@@ -107,13 +129,20 @@ public class Player : MonoBehaviour
         }
     }
 
-    // Reading all of the player's current inputs and updating all associated variables
-    private void HandleInputs()
+    // Rotate the camera based on the player's input
+    private void HandleCamRotation()
     {
-        Vector2 vector2 = inputs.FindAction("Move").ReadValue<Vector2>();;
-        moveInput = new Vector3(-vector2.x, 0, -vector2.y);
+        int rotDir = camRotInputLeft == true ? -1 : camRotInputRight == true ? 1 : 0;
+        controller.camCon.RotateCamera((controller.CameraRotateSpeed * rotDir) * Time.deltaTime);
+    }
 
-        runInput = inputs.FindAction("Run").IsPressed();
+    private void HandleJumping()
+    {
+        if (!controller.charCon.isGrounded && jumpInput)
+        {
+            currentJumpTimer += Time.deltaTime;
+        }
+        else { currentJumpTimer = 0; }
     }
 
 }
