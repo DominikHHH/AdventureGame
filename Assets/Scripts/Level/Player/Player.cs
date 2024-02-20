@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public bool jumpInput;
     [HideInInspector] public bool camRotInputLeft;
     [HideInInspector] public bool camRotInputRight;
+    [HideInInspector] public bool quitInput;
 
     public InputActionMap inputs;
 
@@ -53,6 +54,8 @@ public class Player : MonoBehaviour
         HandleDirection();
         HandleCamRotation();
         HandleJumping();
+
+        HandleQuitting();
     }
 
     // Move the player vertically depending on how much ground is below them right now
@@ -118,6 +121,8 @@ public class Player : MonoBehaviour
 
         camRotInputLeft = inputs.FindAction("CamRotateLeft").IsPressed();
         camRotInputRight = inputs.FindAction("CamRotateRight").IsPressed();
+
+        quitInput = inputs.FindAction("Quit").IsPressed();
     }
 
     // Find the appropriate direction vector for the player to move in
@@ -143,6 +148,15 @@ public class Player : MonoBehaviour
             currentJumpTimer += Time.deltaTime;
         }
         else { currentJumpTimer = 0; }
+    }
+
+    private void HandleQuitting()
+    {
+        if (quitInput)
+        {
+            Debug.Log("Game is quit!");
+            Application.Quit();
+        }
     }
 
 }
