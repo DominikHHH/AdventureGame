@@ -39,7 +39,8 @@ public class MovingPlatform : MonoBehaviour
         if (isMoving)
         {
             currentSpeed = Vector3.MoveTowards(transform.position, targetPoints[currentTargetPoint].transform.position, MoveSpeed * Time.deltaTime) - transform.position;
-            transform.position += currentSpeed;
+            transform.Translate(currentSpeed, Space.World);
+
             if (transform.position == targetPoints[currentTargetPoint].transform.position)
             {
                 StartCoroutine(Pause());

@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
         charCon = GetComponent<CharacterController>();
         mr = transform.GetChild(0).GetComponent<MeshRenderer>();
 
-        cam = Camera.main;
+        cam = FindObjectOfType<Camera>();
         virtualCam = FindObjectOfType<CinemachineVirtualCamera>();
         virtualCamNoDamp = virtualCam.GetComponentInChildren<CinemachineVirtualCamera>();
         camCon = cam.GetComponent<CameraController>();

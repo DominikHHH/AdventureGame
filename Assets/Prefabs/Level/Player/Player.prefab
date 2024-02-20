@@ -136,6 +136,14 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
+    - m_Name: Quit
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: a8e356a8-1ea9-4007-8e17-5d59f5d7f2d6
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
     m_Bindings:
     - m_Name: 2D Vector
       m_Id: c4976942-df01-4241-b334-f8bb2b7a8287
@@ -208,6 +216,14 @@ MonoBehaviour:
       m_Processors: 
       m_Groups: 
       m_Action: Jump
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 781bd66d-33b0-4eef-ba06-ca970cf9ea91
+      m_Path: <Keyboard>/escape
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Quit
       m_Flags: 0
   direction: {x: 0, y: 0, z: 0}
   moveAccel: 0
