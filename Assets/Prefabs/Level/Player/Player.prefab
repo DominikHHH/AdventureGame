@@ -39,6 +39,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7330333190869631099}
+  - {fileID: 2223219922075380449}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4544930735420799245
@@ -61,8 +62,8 @@ MonoBehaviour:
   WalkSpeed: 3
   RunSpeed: 6
   Acceleration: 0.04
-  JumpHeight: 8.5
-  JumpTimer: 0.175
+  JumpHeight: 6.5
+  JumpTimer: 0.2
   CameraRotateSpeed: 75
   player: {fileID: 0}
   stateMachine: {fileID: 0}
@@ -89,8 +90,10 @@ MonoBehaviour:
   moveInput: {x: 0, y: 0, z: 0}
   runInput: 0
   jumpInput: 0
+  pickUpInput: 0
   camRotInputLeft: 0
   camRotInputRight: 0
+  quitInput: 0
   inputs:
     m_Name: Inputs
     m_Id: 05b632c3-9af7-4ca8-8d15-b0e822148553
@@ -116,6 +119,14 @@ MonoBehaviour:
       m_Type: 1
       m_ExpectedControlType: Button
       m_Id: 2c5d036b-c6c5-42f9-a06d-6dde6112a8e7
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: PickUp
+      m_Type: 0
+      m_ExpectedControlType: Button
+      m_Id: 12a28185-4604-43f8-b80a-876020e551b6
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -225,11 +236,20 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Quit
       m_Flags: 0
+    - m_Name: 
+      m_Id: e1b7b051-4f18-4e37-b7ea-336f2317b184
+      m_Path: <Keyboard>/p
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: PickUp
+      m_Flags: 0
   direction: {x: 0, y: 0, z: 0}
   moveAccel: 0
   currentGravity: 0
   currentJumpTimer: 0
   movingPlatformSpeed: {x: 0, y: 0, z: 0}
+  PickUpAnchor: {fileID: 2223219922075380449}
 --- !u!114 &8231341351885294722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,3 +444,34 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8121372171400567257
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2223219922075380449}
+  m_Layer: 0
+  m_Name: PickUpAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2223219922075380449
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8121372171400567257}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.67, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5647774592138354595}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

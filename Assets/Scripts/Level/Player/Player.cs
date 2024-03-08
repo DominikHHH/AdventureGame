@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public Vector3 moveInput;
     [HideInInspector] public bool runInput;
     [HideInInspector] public bool jumpInput;
+    [HideInInspector] public bool pickUpInput;
     [HideInInspector] public bool camRotInputLeft;
     [HideInInspector] public bool camRotInputRight;
     [HideInInspector] public bool quitInput;
@@ -31,8 +32,10 @@ public class Player : MonoBehaviour
 
     public Vector3 movingPlatformSpeed;
 
+    public Transform PickUpAnchor;
+
     // Main components
-    private PlayerController controller;
+    [HideInInspector] public PlayerController controller;
 
     private void Awake()
     {
@@ -118,6 +121,8 @@ public class Player : MonoBehaviour
         runInput = inputs.FindAction("Run").IsPressed();
 
         jumpInput = inputs.FindAction("Jump").IsPressed();
+
+        pickUpInput = inputs.FindAction("PickUp").triggered && inputs.FindAction("PickUp").ReadValue<float>() > 0;
 
         camRotInputLeft = inputs.FindAction("CamRotateLeft").IsPressed();
         camRotInputRight = inputs.FindAction("CamRotateRight").IsPressed();

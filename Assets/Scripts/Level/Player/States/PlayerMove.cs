@@ -34,9 +34,10 @@ public class PlayerMove : PlayerState
             transform.LookAt(loweredCamPos, Vector3.up);
 
             // Forwards and sideways movement respectively
-            controller.charCon.Move(transform.forward * player.direction.z * player.moveAccel * Time.deltaTime);
-            controller.charCon.Move(transform.right * player.direction.x * player.moveAccel * Time.deltaTime);
-            controller.charCon.Move(player.movingPlatformSpeed);
+            Vector3 finalMoveDirection = (transform.forward * player.direction.z + transform.right * player.direction.x) * player.moveAccel * Time.deltaTime + player.movingPlatformSpeed;
+            controller.charCon.Move(finalMoveDirection);
+
+
         }
         else
         {
