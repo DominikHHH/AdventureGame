@@ -10,7 +10,8 @@ public class MixingTable : MonoBehaviour
     //
     //*---------------------------------------------*
 
-    GameObject currentRequiredObj;
+    public List<GameObject> RequiredObjects = new List<GameObject>();
+    List<GameObject> collectedObjects = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,11 @@ public class MixingTable : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        
+    }
+
+    private void OnCollisionEnter(Collision collision)
     {
         
     }
