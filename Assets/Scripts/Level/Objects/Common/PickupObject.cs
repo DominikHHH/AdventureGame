@@ -39,19 +39,21 @@ public class PickupObject : MonoBehaviour
     {
         if (isPickedUp)
         {
-            if (player.pickUpInput)
+            //Debug.Log(player.controller.charCon.velocity);
+            if (player.pickUpInput && player.PickUpAnchor.childCount != 0)
             {
                 isPickedUp = false;
                 col.enabled = true;
                 rb.isKinematic = false;
 
                 player.PickUpAnchor.DetachChildren();
+                rb.velocity = player.velocity;
             }
         }
         else
         {
             // Check for if the player has gotten close enough to pick up
-            if (player.pickUpInput)
+            if (player.pickUpInput && player.PickUpAnchor.childCount == 0)
             {
                 if (Vector3.Distance(rb.position, player.transform.position) <= PickUpDistance)
                 {

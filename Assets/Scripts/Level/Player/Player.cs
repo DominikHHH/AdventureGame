@@ -25,10 +25,11 @@ public class Player : MonoBehaviour
     public InputActionMap inputs;
 
     // Player physics
+    [HideInInspector] public Vector3 velocity;
     [HideInInspector] public Vector3 direction;
     [HideInInspector] public float moveAccel;
-    public float currentGravity;
-    public float currentJumpTimer;
+    [HideInInspector] public float currentGravity;
+    [HideInInspector] public float currentJumpTimer;
 
     public Vector3 movingPlatformSpeed;
 
@@ -49,6 +50,12 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        velocity = new Vector3(
+            controller.charCon.velocity.x,
+            controller.stateMachine.CurrentState.GetType() == typeof(PlayerJump) ? 0 : -currentGravity, 
+            controller.charCon.velocity.z);
+        Debug.Log(velocity);
+        
         // Update basic physics mechanics and inputs, regardless of the player's current state
         HandleInputs();
 

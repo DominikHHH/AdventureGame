@@ -36,8 +36,6 @@ public class PlayerMove : PlayerState
             // Forwards and sideways movement respectively
             Vector3 finalMoveDirection = (transform.forward * player.direction.z + transform.right * player.direction.x) * player.moveAccel * Time.deltaTime + player.movingPlatformSpeed;
             controller.charCon.Move(finalMoveDirection);
-
-
         }
         else
         {

@@ -10,7 +10,8 @@ public class Water : MonoBehaviour
     //
     //*---------------------------------------------*
 
-    public float WaterForce;
+    public float WaterForceMin;
+    public float WaterForceMax;
     public float BounceRange;
 
     void Start()
@@ -29,13 +30,13 @@ public class Water : MonoBehaviour
         if (other.gameObject.GetComponent<Player>() != null)
         {
             Player player = other.gameObject.GetComponent<Player>();
-            player.currentGravity -= WaterForce;
+            player.currentGravity -= Random.Range(WaterForceMin, WaterForceMax);
             player.currentGravity = Mathf.Clamp(player.currentGravity, -BounceRange, BounceRange);
         }
         else if (other.attachedRigidbody != null)
         {
             Rigidbody rb = other.attachedRigidbody;
-            rb.AddForce(new Vector3(0, WaterForce, 0));
+            rb.AddForce(new Vector3(0, Random.Range(WaterForceMin, WaterForceMax), 0));
             rb.velocity = new Vector3(0, Mathf.Clamp(rb.velocity.y, -BounceRange, BounceRange), 0);
         }
     }
