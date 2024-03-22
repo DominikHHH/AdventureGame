@@ -13,6 +13,15 @@ public class MixingTable : MonoBehaviour
     public List<GameObject> RequiredObjects = new List<GameObject>();
     List<GameObject> collectedObjects = new List<GameObject>();
 
+    Player player;
+    CameraController camCon;
+
+    private void Awake()
+    {
+        player = FindObjectOfType<Player>();
+        camCon = FindObjectOfType<CameraController>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +76,7 @@ public class MixingTable : MonoBehaviour
     // Initiate mixing sequence if all required objects have been found
     void AllCollected()
     {
-        Debug.Log("Well done! I am proud of you");
+        player.enabled = false;
+        camCon.ChangeAnchor(2);
     }
 }

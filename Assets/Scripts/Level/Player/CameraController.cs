@@ -11,20 +11,39 @@ public class CameraController : MonoBehaviour
     //
     //*---------------------------------------------*
 
+    // Camera Position States
+    public GameObject[] StateCameras;
+
+
     // Object references
     Camera cam;
-    CinemachineVirtualCamera virtualCam;
+    CinemachineVirtualCamera currentVirtualCam;
 
     private void Awake()
     {
         cam = Camera.main;
-        virtualCam = FindObjectOfType<CinemachineVirtualCamera>().transform.parent.GetComponent<CinemachineVirtualCamera>();
+        currentVirtualCam = FindObjectOfType<CinemachineVirtualCamera>().transform.parent.GetComponent<CinemachineVirtualCamera>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
         
+    }
+
+    public void ChangeAnchor(int cam_id)
+    {
+        for (int i = 0; i < StateCameras.Length; i++)
+        {
+            if (i == cam_id)
+            {
+                StateCameras[i].SetActive(true);
+            }
+            else
+            {
+                StateCameras[i].SetActive(false);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -36,6 +55,6 @@ public class CameraController : MonoBehaviour
     // Rotate the camera by a set "scale" value
     public void RotateCamera(float rotScale)
     {
-        virtualCam.VirtualCameraGameObject.transform.eulerAngles += new Vector3(0, rotScale, 0);
+        currentVirtualCam.VirtualCameraGameObject.transform.eulerAngles += new Vector3(0, rotScale, 0);
     }
 }
