@@ -13,25 +13,16 @@ public class MixingTable : MonoBehaviour
     public List<GameObject> RequiredObjects = new List<GameObject>();
     List<GameObject> collectedObjects = new List<GameObject>();
 
+    MixingSequence sequence;
     Player player;
     CameraController camCon;
 
     private void Awake()
     {
+        sequence = FindObjectOfType<MixingSequence>();
+        sequence.gameObject.SetActive(false);
         player = FindObjectOfType<Player>();
         camCon = FindObjectOfType<CameraController>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -78,5 +69,6 @@ public class MixingTable : MonoBehaviour
     {
         player.enabled = false;
         camCon.ChangeAnchor(2);
+        sequence.gameObject.SetActive(true);
     }
 }

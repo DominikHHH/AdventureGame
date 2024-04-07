@@ -19,7 +19,7 @@ public class PickupObject : MonoBehaviour
 
     MeshRenderer mesh;
     Rigidbody rb;
-    SphereCollider col;
+    Collider col;
 
     private void Awake()
     {
@@ -27,7 +27,7 @@ public class PickupObject : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         mesh = GetComponent<MeshRenderer>();
-        col = GetComponent<SphereCollider>();
+        col = GetComponent<Collider>();
     }
 
     void Start()
@@ -39,7 +39,6 @@ public class PickupObject : MonoBehaviour
     {
         if (isPickedUp)
         {
-            //Debug.Log(player.controller.charCon.velocity);
             if (player.pickUpInput && player.PickUpAnchor.childCount != 0)
             {
                 isPickedUp = false;
@@ -61,6 +60,7 @@ public class PickupObject : MonoBehaviour
                     col.enabled = false;
                     rb.isKinematic = true;
 
+                    // Trying to move the object so it doesn't cross into the player's collider
                     transform.position = player.PickUpAnchor.position;
                     transform.parent = player.PickUpAnchor;
                 }

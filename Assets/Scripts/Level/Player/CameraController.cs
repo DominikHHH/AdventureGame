@@ -25,12 +25,6 @@ public class CameraController : MonoBehaviour
         currentVirtualCam = FindObjectOfType<CinemachineVirtualCamera>().transform.parent.GetComponent<CinemachineVirtualCamera>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     public void ChangeAnchor(int cam_id)
     {
         for (int i = 0; i < StateCameras.Length; i++)
@@ -44,12 +38,6 @@ public class CameraController : MonoBehaviour
                 StateCameras[i].SetActive(false);
             }
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     // Rotate the camera by a set "scale" value

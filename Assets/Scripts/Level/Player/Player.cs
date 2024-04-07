@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
             controller.charCon.velocity.x,
             controller.stateMachine.CurrentState.GetType() == typeof(PlayerJump) ? 0 : -currentGravity, 
             controller.charCon.velocity.z);
-        Debug.Log(velocity);
+        //Debug.Log(velocity);
         
         // Update basic physics mechanics and inputs, regardless of the player's current state
         HandleInputs();
