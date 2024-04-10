@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
+using UnityEngine.Timeline;
 
 public class MixingTable : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class MixingTable : MonoBehaviour
     //
     //*---------------------------------------------*
 
+    public PlayableDirector cutscene;
     public List<GameObject> RequiredObjects = new List<GameObject>();
     List<GameObject> collectedObjects = new List<GameObject>();
 
@@ -25,16 +28,16 @@ public class MixingTable : MonoBehaviour
         camCon = FindObjectOfType<CameraController>();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (RequiredObjects.Contains(collision.gameObject))
+        if (RequiredObjects.Contains(other.gameObject))
         {
-            if (collision.transform.parent != null)
+            if (other.transform.parent != null)
             {
-                collision.transform.parent.DetachChildren();
+                other.transform.parent.DetachChildren();
             }
-            collectedObjects.Add(collision.gameObject);
-            collision.gameObject.SetActive(false);
+            collectedObjects.Add(other.gameObject);
+            other.GetComponent<PickupObject>().Deactivate();
 
             if (collectedObjects.Count >= RequiredObjects.Count)
             {
@@ -70,5 +73,6 @@ public class MixingTable : MonoBehaviour
         player.enabled = false;
         camCon.ChangeAnchor(2);
         sequence.gameObject.SetActive(true);
+        cutscene.Play();
     }
 }

@@ -24,10 +24,13 @@ public class Water : MonoBehaviour
         }
         else if (other.attachedRigidbody != null)
         {
-            Rigidbody rb = other.attachedRigidbody;
-            float force = Random.Range(WaterForceMin, WaterForceMax);
-            rb.velocity += new Vector3(-rb.velocity.x / force, force, -rb.velocity.z / force);
-            rb.velocity = new Vector3(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -BounceRange, BounceRange), rb.velocity.z);
+            if (other.GetComponent<Rigidbody>().isKinematic == false)
+            {
+                Rigidbody rb = other.attachedRigidbody;
+                float force = Random.Range(WaterForceMin, WaterForceMax);
+                rb.velocity += new Vector3(-rb.velocity.x / force, force, -rb.velocity.z / force);
+                rb.velocity = new Vector3(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -BounceRange, BounceRange), rb.velocity.z);
+            }
         }
     }
 }

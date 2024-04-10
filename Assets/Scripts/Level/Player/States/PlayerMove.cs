@@ -36,6 +36,17 @@ public class PlayerMove : PlayerState
             // Forwards and sideways movement respectively
             Vector3 finalMoveDirection = (transform.forward * player.direction.z + transform.right * player.direction.x) * player.moveAccel * Time.deltaTime + player.movingPlatformSpeed;
             controller.charCon.Move(finalMoveDirection);
+
+            if (player.runInput)
+            {
+                player.animator.SetBool("Running", true);
+                player.animator.SetBool("Walking", false);
+            }
+            else
+            {
+                player.animator.SetBool("Running", false);
+                player.animator.SetBool("Walking", true);
+            }
         }
         else
         {
@@ -45,6 +56,13 @@ public class PlayerMove : PlayerState
 
     public override void ExitState()
     {
-
+        if (player.runInput)
+        {
+            player.animator.SetBool("Running", false);
+        }
+        else
+        {
+            player.animator.SetBool("Walking", false);
+        }
     }
 }

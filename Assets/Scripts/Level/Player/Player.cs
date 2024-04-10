@@ -35,12 +35,15 @@ public class Player : MonoBehaviour
 
     public Transform PickUpAnchor;
 
+
     // Main components
     [HideInInspector] public PlayerController controller;
+    [HideInInspector] public Animator animator;
 
     private void Awake()
     {
         controller = GetComponent<PlayerController>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     void Start()
@@ -54,7 +57,11 @@ public class Player : MonoBehaviour
             controller.charCon.velocity.x,
             controller.stateMachine.CurrentState.GetType() == typeof(PlayerJump) ? 0 : -currentGravity, 
             controller.charCon.velocity.z);
-        //Debug.Log(velocity);
+
+        if (moveInput != Vector3.zero)
+        {
+            animator.transform.LookAt(animator.transform.position + moveInput);
+        }
         
         // Update basic physics mechanics and inputs, regardless of the player's current state
         HandleInputs();

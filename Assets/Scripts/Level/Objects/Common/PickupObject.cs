@@ -12,6 +12,7 @@ public class PickupObject : MonoBehaviour
 
     public float PickUpDistance;
     public float Weight;
+    public Vector3 FinalPos;
     
     bool isPickedUp = false;
 
@@ -66,5 +67,13 @@ public class PickupObject : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void Deactivate()
+    {
+        col.enabled = false;
+        rb.isKinematic = true;
+
+        transform.position = FinalPos;
     }
 }

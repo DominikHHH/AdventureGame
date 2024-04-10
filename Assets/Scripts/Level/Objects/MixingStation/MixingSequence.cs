@@ -12,19 +12,29 @@ public class MixingSequence : MonoBehaviour
     //*---------------------------------------------*
 
     [Header("Interactive Toggles")]
+    public Animator Fruit1;
+    public Animator Fruit2;
     public float SqueezeSpeed;
+
+    [Space(10)]
+    public GameObject RumBottle;
+    public float PourSpeed;
+    public float PourAngle;
+    public float TiltSpeed;
 
     enum MixStates
     {
         SqueezeFruit1,
         SqueezeFruit2,
         OpenChest,
-        PourAlcohol
+        PourRum,
+        Win
     };
     MixStates currentMixState = MixStates.SqueezeFruit1;
 
     [Space(10)]
     public GameObject[] StateInterfaces;
+
 
     // Fruit squeezing progress
     bool fruit1_isSqueezing = false;
@@ -32,10 +42,21 @@ public class MixingSequence : MonoBehaviour
 
     float fruit1Progress;
     float fruit2Progress;
+    float pourProgress;
 
     // Chest opening progress
     Vector2 mousePosStart;
     Vector2 mousePosEnd;
+
+    public void UITurnOn()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void UITurnOff()
+    {
+        gameObject.SetActive(false);
+    }
 
     public void ChangeUI(int id)
     {
@@ -65,6 +86,7 @@ public class MixingSequence : MonoBehaviour
 
                 if (fruit1Progress > 1)
                 {
+                    Fruit1.SetTrigger("Unsqueeze");
                     currentMixState = MixStates.SqueezeFruit2;
                     ChangeUI(1);
                 }
@@ -78,6 +100,7 @@ public class MixingSequence : MonoBehaviour
 
                 if (fruit2Progress > 1)
                 {
+                    Fruit2.SetTrigger("Unsqueeze");
                     currentMixState = MixStates.OpenChest;
                     ChangeUI(2);
                 }
@@ -85,27 +108,45 @@ public class MixingSequence : MonoBehaviour
 
             case MixStates.OpenChest:
                 break;
+
+            case MixStates.PourRum:
+                if (RumBottle.transform.rotation.z >= PourAngle)
+                {
+                    pourProgress += PourSpeed;
+                }
+
+                if (pourProgress > 1)
+                {
+                    currentMixState = MixStates.Win;
+                    ChangeUI(3);
+                }
+
+                break;
         }
     }
 
     public void Squeeze1True()
     {
         fruit1_isSqueezing = true;
+        Fruit1.SetTrigger("Squeeze");
     }
 
     public void Squeeze1False()
     {
         fruit1_isSqueezing = false;
+        Fruit1.SetTrigger("Unsqueeze");
     }
 
     public void Squeeze2True()
     {
         fruit2_isSqueezing = true;
+        Fruit2.SetTrigger("Squeeze");
     }
 
     public void Squeeze2False()
     {
         fruit2_isSqueezing = false;
+        Fruit2.SetTrigger("Unsqueeze");
     }
 
     public void OpenChestStart()
@@ -121,9 +162,23 @@ public class MixingSequence : MonoBehaviour
             if (mousePosEnd.y > mousePosStart.y)
             {
                 Debug.Log("Chest is being opened");
-                currentMixState = MixStates.PourAlcohol;
+                currentMixState = MixStates.PourRum;
                 ChangeUI(3);
             }
         }
+    }
+
+    public void TiltRumStart()
+    {
+        mousePosStart = Mouse.current.position.ReadValue();
+    }
+
+    public void TiltRum()
+    {
+        Vector2 mouse = Mouse.current.position.ReadValue();
+        RumBottle.transform.eulerAngles = new Vector3(
+            RumBottle.transform.eulerAngles.x,
+            RumBottle.transform.eulerAngles.y,
+            Mathf.Clamp((mouse.x - mousePosStart.x) * TiltSpeed, -90, 90));
     }
 }

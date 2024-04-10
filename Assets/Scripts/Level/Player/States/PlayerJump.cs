@@ -9,6 +9,8 @@ public class PlayerJump : PlayerIdle
         if (controller.stateMachine.PreviousState.GetType() != typeof(PlayerJumpMove))
         {
             player.currentGravity = -controller.JumpHeight;
+            player.animator.SetTrigger("StartJump");
+            player.animator.SetBool("Jumping", true);
         }
     }
 
@@ -16,6 +18,7 @@ public class PlayerJump : PlayerIdle
     {
         if (controller.charCon.isGrounded)
         {
+            player.animator.SetTrigger("Land");
             controller.stateMachine.ChangeState(typeof(PlayerIdle));
         }
 
@@ -31,6 +34,8 @@ public class PlayerJump : PlayerIdle
 
     public override void ExitState()
     {
-
+        player.animator.SetBool("Jumping", false);
+        player.animator.SetBool("Running", false);
+        player.animator.SetBool("Walking", false);
     }
 }
