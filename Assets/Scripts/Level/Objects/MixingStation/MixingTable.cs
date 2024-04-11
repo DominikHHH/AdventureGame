@@ -71,6 +71,7 @@ public class MixingTable : MonoBehaviour
     void AllCollected()
     {
         player.enabled = false;
+        player.moveInput = Vector3.zero;
         camCon.ChangeAnchor(2);
         sequence.gameObject.SetActive(true);
         cutscene.Play();

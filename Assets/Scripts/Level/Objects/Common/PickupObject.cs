@@ -13,6 +13,7 @@ public class PickupObject : MonoBehaviour
     public float PickUpDistance;
     public float Weight;
     public Vector3 FinalPos;
+    public Quaternion FinalRot;
     
     bool isPickedUp = false;
 
@@ -21,6 +22,7 @@ public class PickupObject : MonoBehaviour
     MeshRenderer mesh;
     Rigidbody rb;
     Collider col;
+    Animator anim;
 
     private void Awake()
     {
@@ -29,6 +31,7 @@ public class PickupObject : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         mesh = GetComponent<MeshRenderer>();
         col = GetComponent<Collider>();
+        anim = GetComponent<Animator>() == null ? null : GetComponent<Animator>();
     }
 
     void Start()
@@ -75,5 +78,22 @@ public class PickupObject : MonoBehaviour
         rb.isKinematic = true;
 
         transform.position = FinalPos;
+        transform.rotation = FinalRot;
+
+        if (anim != null && gameObject.tag == "TreasureChest")
+        {
+            AnimatorOff();
+            anim.SetTrigger("Deactivate");
+        }
+    }
+
+    public void AnimatorOn()
+    {
+        anim.enabled = true;
+    }
+
+    public void AnimatorOff()
+    {
+        anim.enabled = false;
     }
 }

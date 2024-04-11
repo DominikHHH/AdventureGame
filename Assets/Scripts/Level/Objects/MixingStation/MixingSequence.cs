@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Playables;
+using UnityEngine.Timeline;
 
 public class MixingSequence : MonoBehaviour
 {
@@ -14,13 +16,23 @@ public class MixingSequence : MonoBehaviour
     [Header("Interactive Toggles")]
     public Animator Fruit1;
     public Animator Fruit2;
+    public ParticleSystem Fruit1Particles;
+    public ParticleSystem Fruit2Particles;
     public float SqueezeSpeed;
 
     [Space(10)]
+    public GameObject TreasureChest;
+
+    [Space(10)]
     public GameObject RumBottle;
+    public ParticleSystem RumParticles;
     public float PourSpeed;
     public float PourAngle;
     public float TiltSpeed;
+
+
+    [Space(10)]
+    public PlayableDirector[] Cutscenes;
 
     enum MixStates
     {
@@ -35,7 +47,6 @@ public class MixingSequence : MonoBehaviour
     [Space(10)]
     public GameObject[] StateInterfaces;
 
-
     // Fruit squeezing progress
     bool fruit1_isSqueezing = false;
     bool fruit2_isSqueezing = false;
@@ -47,6 +58,13 @@ public class MixingSequence : MonoBehaviour
     // Chest opening progress
     Vector2 mousePosStart;
     Vector2 mousePosEnd;
+
+    CameraController camCon;
+
+    private void Awake()
+    {
+        camCon = FindObjectOfType<CameraController>();
+    }
 
     public void UITurnOn()
     {
@@ -89,6 +107,7 @@ public class MixingSequence : MonoBehaviour
                     Fruit1.SetTrigger("Unsqueeze");
                     currentMixState = MixStates.SqueezeFruit2;
                     ChangeUI(1);
+                    Fruit1Particles.Stop();
                 }
                 break;
 
@@ -101,8 +120,12 @@ public class MixingSequence : MonoBehaviour
                 if (fruit2Progress > 1)
                 {
                     Fruit2.SetTrigger("Unsqueeze");
+                    TreasureChest.GetComponent<Animator>().enabled = true;
+
                     currentMixState = MixStates.OpenChest;
                     ChangeUI(2);
+                    Cutscenes[0].Play();
+                    Fruit2Particles.Stop();
                 }
                 break;
 
@@ -110,15 +133,22 @@ public class MixingSequence : MonoBehaviour
                 break;
 
             case MixStates.PourRum:
-                if (RumBottle.transform.rotation.z >= PourAngle)
+                if (RumBottle.transform.eulerAngles.z >= PourAngle)
                 {
+                    RumParticles.Play();
                     pourProgress += PourSpeed;
+                }
+                else
+                {
+                    RumParticles.Stop();
                 }
 
                 if (pourProgress > 1)
                 {
                     currentMixState = MixStates.Win;
                     ChangeUI(3);
+                    camCon.ChangeAnchor(3);
+                    Cutscenes[2].Play();
                 }
 
                 break;
@@ -129,24 +159,28 @@ public class MixingSequence : MonoBehaviour
     {
         fruit1_isSqueezing = true;
         Fruit1.SetTrigger("Squeeze");
+        Fruit1Particles.Play();
     }
 
     public void Squeeze1False()
     {
         fruit1_isSqueezing = false;
         Fruit1.SetTrigger("Unsqueeze");
+        Fruit1Particles.Stop();
     }
 
     public void Squeeze2True()
     {
         fruit2_isSqueezing = true;
         Fruit2.SetTrigger("Squeeze");
+        Fruit2Particles.Play();
     }
 
     public void Squeeze2False()
     {
         fruit2_isSqueezing = false;
         Fruit2.SetTrigger("Unsqueeze");
+        Fruit2Particles.Stop();
     }
 
     public void OpenChestStart()
@@ -161,9 +195,12 @@ public class MixingSequence : MonoBehaviour
         {
             if (mousePosEnd.y > mousePosStart.y)
             {
-                Debug.Log("Chest is being opened");
+                TreasureChest.GetComponent<Animator>().enabled = true;
+                RumBottle.transform.parent.DetachChildren();
+
                 currentMixState = MixStates.PourRum;
                 ChangeUI(3);
+                Cutscenes[1].Play();
             }
         }
     }
@@ -179,6 +216,6 @@ public class MixingSequence : MonoBehaviour
         RumBottle.transform.eulerAngles = new Vector3(
             RumBottle.transform.eulerAngles.x,
             RumBottle.transform.eulerAngles.y,
-            Mathf.Clamp((mouse.x - mousePosStart.x) * TiltSpeed, -90, 90));
+            Mathf.Clamp((mouse.x - mousePosStart.x) * TiltSpeed, 0, PourAngle));
     }
 }
