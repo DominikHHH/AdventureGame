@@ -58,7 +58,7 @@ public class PickupObject : MonoBehaviour
             // Check for if the player has gotten close enough to pick up
             if (player.pickUpInput && player.PickUpAnchor.childCount == 0)
             {
-                if (Vector3.Distance(rb.position, player.transform.position) <= PickUpDistance)
+                if (Vector3.Distance(rb.position, player.transform.position) <= PickUpDistance && col.enabled)
                 {
                     isPickedUp = true;
                     col.enabled = false;

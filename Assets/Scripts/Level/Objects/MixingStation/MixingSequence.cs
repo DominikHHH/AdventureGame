@@ -107,6 +107,7 @@ public class MixingSequence : MonoBehaviour
                     Fruit1.SetTrigger("Unsqueeze");
                     currentMixState = MixStates.SqueezeFruit2;
                     ChangeUI(1);
+                    Cutscenes[0].Play();
                     Fruit1Particles.Stop();
                 }
                 break;
@@ -124,7 +125,7 @@ public class MixingSequence : MonoBehaviour
 
                     currentMixState = MixStates.OpenChest;
                     ChangeUI(2);
-                    Cutscenes[0].Play();
+                    Cutscenes[1].Play();
                     Fruit2Particles.Stop();
                 }
                 break;
@@ -148,7 +149,7 @@ public class MixingSequence : MonoBehaviour
                     currentMixState = MixStates.Win;
                     ChangeUI(3);
                     camCon.ChangeAnchor(3);
-                    Cutscenes[2].Play();
+                    Cutscenes[3].Play();
                 }
 
                 break;
@@ -200,7 +201,7 @@ public class MixingSequence : MonoBehaviour
 
                 currentMixState = MixStates.PourRum;
                 ChangeUI(3);
-                Cutscenes[1].Play();
+                Cutscenes[2].Play();
             }
         }
     }
