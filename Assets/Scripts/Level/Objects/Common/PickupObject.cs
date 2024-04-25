@@ -50,7 +50,8 @@ public class PickupObject : MonoBehaviour
                 rb.isKinematic = false;
 
                 player.PickUpAnchor.DetachChildren();
-                rb.velocity = player.velocity;
+                rb.velocity = new Vector3(
+                    player.velocity.x * 2, player.velocity.y > 0 ? player.velocity.y : 0, player.velocity.z * 2);
             }
         }
         else

@@ -40,6 +40,18 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    // Set virtual camera damping
+    public void ChangeSpeed(float speed)
+    {
+        CinemachineFramingTransposer transposer = currentVirtualCam.GetCinemachineComponent<CinemachineFramingTransposer>();
+        if (transposer != null)
+        {
+            transposer.m_XDamping = speed;
+            transposer.m_YDamping = speed;
+            transposer.m_ZDamping = speed;
+        }
+    }
+
     // Rotate the camera by a set "scale" value
     public void RotateCamera(float rotScale)
     {

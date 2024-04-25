@@ -149,6 +149,7 @@ public class MixingSequence : MonoBehaviour
                     currentMixState = MixStates.Win;
                     ChangeUI(3);
                     camCon.ChangeAnchor(3);
+                    camCon.ChangeSpeed(0);
                     Cutscenes[3].Play();
                 }
 
