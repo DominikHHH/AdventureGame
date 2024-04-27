@@ -198,7 +198,6 @@ public class MixingSequence : MonoBehaviour
             if (mousePosEnd.y > mousePosStart.y)
             {
                 TreasureChest.GetComponent<Animator>().enabled = true;
-                RumBottle.transform.parent.DetachChildren();
 
                 currentMixState = MixStates.PourRum;
                 ChangeUI(3);
