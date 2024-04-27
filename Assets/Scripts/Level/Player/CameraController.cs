@@ -17,11 +17,13 @@ public class CameraController : MonoBehaviour
 
     // Object references
     Camera cam;
+    CinemachineBrain camBrain;
     CinemachineVirtualCamera currentVirtualCam;
 
     private void Awake()
     {
         cam = Camera.main;
+        camBrain = GetComponent<CinemachineBrain>();
         currentVirtualCam = FindObjectOfType<CinemachineVirtualCamera>().transform.parent.GetComponent<CinemachineVirtualCamera>();
     }
 
@@ -43,12 +45,17 @@ public class CameraController : MonoBehaviour
     // Set virtual camera damping
     public void ChangeSpeed(float speed)
     {
-        CinemachineFramingTransposer transposer = currentVirtualCam.GetCinemachineComponent<CinemachineFramingTransposer>();
-        if (transposer != null)
+        CinemachineFramingTransposer transposer;
+        foreach (GameObject cam in StateCameras)
         {
-            transposer.m_XDamping = speed;
-            transposer.m_YDamping = speed;
-            transposer.m_ZDamping = speed;
+            if (cam.activeSelf)
+            {
+                transposer = cam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>();
+
+                transposer.m_XDamping = speed;
+                transposer.m_YDamping = speed;
+                transposer.m_ZDamping = speed;
+            }
         }
     }
 

@@ -150,7 +150,7 @@ public class MixingSequence : MonoBehaviour
                     ChangeUI(3);
                     camCon.ChangeAnchor(3);
                     camCon.ChangeSpeed(0);
-                    Cutscenes[3].Play();
+                    //Cutscenes[3].Play();
                 }
 
                 break;
