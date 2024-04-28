@@ -145,7 +145,8 @@ public class MixingSequence : MonoBehaviour
                 break;
 
             case MixStates.PourRum:
-                if (RumBottle.transform.eulerAngles.z >= PourAngle)
+                float currentAngle = RumBottle.transform.eulerAngles.z;
+                if (currentAngle >= PourAngle && currentAngle <= 180f)
                 {
                     RumParticles.Play();
                     pourProgress += PourSpeed;
