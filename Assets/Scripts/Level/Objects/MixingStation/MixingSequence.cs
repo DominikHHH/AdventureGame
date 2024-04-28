@@ -14,6 +14,11 @@ public class MixingSequence : MonoBehaviour
     //*---------------------------------------------*
 
     [Header("Interactive Toggles")]
+    public GameObject Player;
+    public Vector3 PlayerFinalPos;
+    public Quaternion PlayerFinalRot;
+
+    [Space(10)]
     public Animator Fruit1;
     public Animator Fruit2;
     public ParticleSystem Fruit1Particles;
@@ -91,6 +96,12 @@ public class MixingSequence : MonoBehaviour
         }
     }
 
+    public void SetPlayerPos()
+    {
+        Player.transform.position = PlayerFinalPos;
+        Player.transform.GetChild(0).rotation = PlayerFinalRot;
+    }
+
     void Update()
     {
         switch (currentMixState)
@@ -106,7 +117,7 @@ public class MixingSequence : MonoBehaviour
                 {
                     Fruit1.SetTrigger("Unsqueeze");
                     currentMixState = MixStates.SqueezeFruit2;
-                    ChangeUI(1);
+                    ChangeUI(2);
                     Cutscenes[0].Play();
                     Fruit1Particles.Stop();
                 }
@@ -124,7 +135,7 @@ public class MixingSequence : MonoBehaviour
                     TreasureChest.GetComponent<Animator>().enabled = true;
 
                     currentMixState = MixStates.OpenChest;
-                    ChangeUI(2);
+                    ChangeUI(3);
                     Cutscenes[1].Play();
                     Fruit2Particles.Stop();
                 }
@@ -147,12 +158,15 @@ public class MixingSequence : MonoBehaviour
                 if (pourProgress > 1)
                 {
                     currentMixState = MixStates.Win;
-                    ChangeUI(3);
+                    ChangeUI(5);
                     camCon.ChangeAnchor(3);
                     camCon.ChangeSpeed(0);
-                    //Cutscenes[3].Play();
+                    Cutscenes[3].Play();
                 }
 
+                break;
+
+            case MixStates.Win:
                 break;
         }
     }
@@ -200,7 +214,7 @@ public class MixingSequence : MonoBehaviour
                 TreasureChest.GetComponent<Animator>().enabled = true;
 
                 currentMixState = MixStates.PourRum;
-                ChangeUI(3);
+                ChangeUI(4);
                 Cutscenes[2].Play();
             }
         }

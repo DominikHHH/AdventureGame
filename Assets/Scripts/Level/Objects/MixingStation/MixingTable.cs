@@ -23,7 +23,6 @@ public class MixingTable : MonoBehaviour
     private void Awake()
     {
         sequence = FindObjectOfType<MixingSequence>();
-        sequence.gameObject.SetActive(false);
         player = FindObjectOfType<Player>();
         camCon = FindObjectOfType<CameraController>();
     }
@@ -70,10 +69,18 @@ public class MixingTable : MonoBehaviour
     // Initiate mixing sequence if all required objects have been found
     void AllCollected()
     {
-        player.enabled = false;
-        player.moveInput = Vector3.zero;
-        camCon.ChangeAnchor(2);
         sequence.gameObject.SetActive(true);
+        sequence.ChangeUI(1);
+
+        player.enabled = false;
+        player.velocity = Vector3.zero;
+        player.moveInput = Vector3.zero;
+
+        player.controller.charCon.enabled = false;
+        player.controller.stateMachine.enabled = false;
+        sequence.SetPlayerPos();
+
+        camCon.ChangeAnchor(2);
         cutscene.Play();
     }
 }

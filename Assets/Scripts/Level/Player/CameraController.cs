@@ -42,21 +42,10 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    // Set virtual camera damping
+    // Set the transition speed between virtual cameras
     public void ChangeSpeed(float speed)
     {
-        CinemachineFramingTransposer transposer;
-        foreach (GameObject cam in StateCameras)
-        {
-            if (cam.activeSelf)
-            {
-                transposer = cam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>();
-
-                transposer.m_XDamping = speed;
-                transposer.m_YDamping = speed;
-                transposer.m_ZDamping = speed;
-            }
-        }
+        camBrain.m_DefaultBlend.m_Time = speed;
     }
 
     // Rotate the camera by a set "scale" value
