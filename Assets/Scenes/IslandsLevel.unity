@@ -1630,6 +1630,8 @@ MonoBehaviour:
   cutscene: {fileID: 41503886}
   RequiredObjects:
   - {fileID: 626957471}
+  - {fileID: 711228801}
+  - {fileID: 641726559}
 --- !u!65 &583796577
 BoxCollider:
   m_ObjectHideFlags: 0
