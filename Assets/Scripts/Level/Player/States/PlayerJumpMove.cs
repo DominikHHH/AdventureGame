@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 
 public class PlayerJumpMove : PlayerMove
 {
@@ -10,7 +9,6 @@ public class PlayerJumpMove : PlayerMove
         if (controller.stateMachine.PreviousState.GetType() != typeof(PlayerJump))
         {
             player.currentGravity = -controller.JumpHeight;
-            player.animator.SetTrigger("StartJump");
             player.animator.SetBool("Jumping", true);
         }
     }
@@ -19,8 +17,9 @@ public class PlayerJumpMove : PlayerMove
     {
         if (controller.charCon.isGrounded)
         {
-            player.animator.SetTrigger("Land");
             controller.stateMachine.ChangeState(typeof(PlayerMove));
+            player.animator.SetTrigger("Land");
+            player.animator.SetBool("Jumping", false);
         }
 
         if (player.moveInput.magnitude > 0)
@@ -35,7 +34,6 @@ public class PlayerJumpMove : PlayerMove
 
     public override void ExitState()
     {
-        player.animator.SetBool("Jumping", false);
         player.animator.SetBool("Running", false);
         player.animator.SetBool("Walking", false);
     }

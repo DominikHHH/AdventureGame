@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
         inputs.Enable();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         velocity = new Vector3(
             controller.charCon.velocity.x,

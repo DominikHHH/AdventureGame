@@ -57,11 +57,11 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 64
-  Gravity: 13
-  GravityAccel: 0.07
+  Gravity: 17
+  GravityAccel: 0.35
   WalkSpeed: 3
   RunSpeed: 6
-  Acceleration: 0.04
+  Acceleration: 13
   JumpHeight: 6.5
   JumpTimer: 0.2
   CameraRotateSpeed: 75
@@ -203,22 +203,6 @@ MonoBehaviour:
       m_Processors: 
       m_Groups: 
       m_Action: Run
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 48d1aff7-b0f2-48d7-8a0e-6adb1a9afd15
-      m_Path: <Keyboard>/q
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: CamRotateLeft
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 50f77be7-054a-415d-b3f1-072af58969d7
-      m_Path: <Keyboard>/e
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: CamRotateRight
       m_Flags: 0
     - m_Name: 
       m_Id: 3626674a-fcd7-4ef9-8b90-eac10b0b3ea1

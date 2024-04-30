@@ -277,58 +277,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3766025004680189413, guid: 5ea48519df6beb44682ed5f5d7952461, type: 3}
-      propertyPath: inputs.m_Bindings.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 3766025004680189413, guid: 5ea48519df6beb44682ed5f5d7952461, type: 3}
-      propertyPath: inputs.m_Bindings.Array.data[6].m_Id
-      value: 3626674a-fcd7-4ef9-8b90-eac10b0b3ea1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3766025004680189413, guid: 5ea48519df6beb44682ed5f5d7952461, type: 3}
-      propertyPath: inputs.m_Bindings.Array.data[7].m_Id
-      value: 781bd66d-33b0-4eef-ba06-ca970cf9ea91
-      objectReference: {fileID: 0}
-    - target: {fileID: 3766025004680189413, guid: 5ea48519df6beb44682ed5f5d7952461, type: 3}
-      propertyPath: inputs.m_Bindings.Array.data[8].m_Id
-      value: e1b7b051-4f18-4e37-b7ea-336f2317b184
-      objectReference: {fileID: 0}
-    - target: {fileID: 3766025004680189413, guid: 5ea48519df6beb44682ed5f5d7952461, type: 3}
-      propertyPath: inputs.m_Bindings.Array.data[9].m_Id
-      value: e1b7b051-4f18-4e37-b7ea-336f2317b184
-      objectReference: {fileID: 0}
-    - target: {fileID: 3766025004680189413, guid: 5ea48519df6beb44682ed5f5d7952461, type: 3}
-      propertyPath: inputs.m_Bindings.Array.data[6].m_Path
-      value: <Keyboard>/space
-      objectReference: {fileID: 0}
-    - target: {fileID: 3766025004680189413, guid: 5ea48519df6beb44682ed5f5d7952461, type: 3}
-      propertyPath: inputs.m_Bindings.Array.data[7].m_Path
-      value: <Keyboard>/escape
-      objectReference: {fileID: 0}
-    - target: {fileID: 3766025004680189413, guid: 5ea48519df6beb44682ed5f5d7952461, type: 3}
-      propertyPath: inputs.m_Bindings.Array.data[8].m_Path
-      value: <Keyboard>/p
-      objectReference: {fileID: 0}
-    - target: {fileID: 3766025004680189413, guid: 5ea48519df6beb44682ed5f5d7952461, type: 3}
-      propertyPath: inputs.m_Bindings.Array.data[9].m_Path
-      value: <Keyboard>/p
-      objectReference: {fileID: 0}
-    - target: {fileID: 3766025004680189413, guid: 5ea48519df6beb44682ed5f5d7952461, type: 3}
-      propertyPath: inputs.m_Bindings.Array.data[6].m_Action
-      value: Jump
-      objectReference: {fileID: 0}
-    - target: {fileID: 3766025004680189413, guid: 5ea48519df6beb44682ed5f5d7952461, type: 3}
-      propertyPath: inputs.m_Bindings.Array.data[7].m_Action
-      value: Quit
-      objectReference: {fileID: 0}
-    - target: {fileID: 3766025004680189413, guid: 5ea48519df6beb44682ed5f5d7952461, type: 3}
-      propertyPath: inputs.m_Bindings.Array.data[8].m_Action
-      value: PickUp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3766025004680189413, guid: 5ea48519df6beb44682ed5f5d7952461, type: 3}
-      propertyPath: inputs.m_Bindings.Array.data[9].m_Action
-      value: PickUp
-      objectReference: {fileID: 0}
     - target: {fileID: 5647774592138354595, guid: 5ea48519df6beb44682ed5f5d7952461, type: 3}
       propertyPath: m_LocalPosition.x
       value: 485.42

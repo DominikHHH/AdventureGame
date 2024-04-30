@@ -4,6 +4,9 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/IslandsLevel.unity
+    guid: 34fc9fefc88be514e96889fcef3b6f37
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: e5dc6b23c1993de49a45ed249db616e0, type: 2}
