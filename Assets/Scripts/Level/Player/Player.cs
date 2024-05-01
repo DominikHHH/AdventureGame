@@ -51,6 +51,11 @@ public class Player : MonoBehaviour
         inputs.Enable();
     }
 
+    private void Update()
+    {
+        HandleInputs();
+    }
+
     private void FixedUpdate()
     {
         velocity = new Vector3(
@@ -63,9 +68,7 @@ public class Player : MonoBehaviour
             animator.transform.LookAt(animator.transform.position + moveInput);
         }
         
-        // Update basic physics mechanics and inputs, regardless of the player's current state
-        HandleInputs();
-
+        // Update basic physics mechanics, regardless of the player's current state
         HandleGravity();
 
         HandleDirection();
