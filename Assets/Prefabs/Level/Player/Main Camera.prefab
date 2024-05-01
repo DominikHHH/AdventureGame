@@ -53,7 +53,7 @@ Camera:
   m_ShutterSpeed: 0.005
   m_Aperture: 16
   m_FocusDistance: 10
-  m_FocalLength: 50
+  m_FocalLength: 25.734083
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
@@ -80,8 +80,8 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
+  m_AllowMSAA: 0
+  m_AllowDynamicResolution: 1
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
-    m_Time: 2
+    m_Time: 1.5
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -140,3 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff92074c48ba1a0498cabce838f56e32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StateCameras:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

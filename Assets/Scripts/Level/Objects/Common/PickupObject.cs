@@ -17,6 +17,8 @@ public class PickupObject : MonoBehaviour
     
     bool isPickedUp = false;
 
+    bool setForce = false;
+
     Player player; // The object that we'll try to follow if we've been picked up
 
     MeshRenderer mesh;
@@ -45,13 +47,7 @@ public class PickupObject : MonoBehaviour
         {
             if (player.pickUpInput && player.PickUpAnchor.childCount != 0)
             {
-                isPickedUp = false;
-                col.enabled = true;
-                rb.isKinematic = false;
-
-                player.PickUpAnchor.DetachChildren();
-                rb.velocity = new Vector3(
-                    player.velocity.x * 2, player.velocity.y > 0 ? player.velocity.y : 0, player.velocity.z * 2);
+                setForce = true;
             }
         }
         else
@@ -70,6 +66,24 @@ public class PickupObject : MonoBehaviour
                     transform.parent = player.PickUpAnchor;
                 }
             }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (setForce)
+        {
+            isPickedUp = false;
+            col.enabled = true;
+
+            player.PickUpAnchor.DetachChildren();
+
+            rb.isKinematic = false;
+            rb.AddForce(new Vector3(
+                    player.velocity.x * 2, player.velocity.y > 0 ? player.velocity.y : 0, player.velocity.z * 2),
+                    ForceMode.VelocityChange);
+
+            setForce = false;
         }
     }
 

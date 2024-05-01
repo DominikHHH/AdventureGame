@@ -2269,22 +2269,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
-    - target: {fileID: 1271090521009152795, guid: 2e21f6ca3a6fabb4cac1a5e3d6135b24, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3782612196722851656, guid: 2e21f6ca3a6fabb4cac1a5e3d6135b24, type: 3}
-      propertyPath: m_DefaultBlend.m_Time
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3782612196722851656, guid: 2e21f6ca3a6fabb4cac1a5e3d6135b24, type: 3}
-      propertyPath: m_DefaultBlend.m_Style
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7494968878137429390, guid: 2e21f6ca3a6fabb4cac1a5e3d6135b24, type: 3}
-      propertyPath: StateCameras.Array.size
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 7494968878137429390, guid: 2e21f6ca3a6fabb4cac1a5e3d6135b24, type: 3}
       propertyPath: StateCameras.Array.data[0]
       value: 
@@ -2301,22 +2285,6 @@ PrefabInstance:
       propertyPath: StateCameras.Array.data[3]
       value: 
       objectReference: {fileID: 704112307}
-    - target: {fileID: 8715034955660273440, guid: 2e21f6ca3a6fabb4cac1a5e3d6135b24, type: 3}
-      propertyPath: orthographic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8715034955660273440, guid: 2e21f6ca3a6fabb4cac1a5e3d6135b24, type: 3}
-      propertyPath: field of view
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 8715034955660273440, guid: 2e21f6ca3a6fabb4cac1a5e3d6135b24, type: 3}
-      propertyPath: far clip plane
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 8715034955660273440, guid: 2e21f6ca3a6fabb4cac1a5e3d6135b24, type: 3}
-      propertyPath: near clip plane
-      value: 0.3
-      objectReference: {fileID: 0}
     - target: {fileID: 8904199865761675757, guid: 2e21f6ca3a6fabb4cac1a5e3d6135b24, type: 3}
       propertyPath: m_LocalPosition.x
       value: 485.42
