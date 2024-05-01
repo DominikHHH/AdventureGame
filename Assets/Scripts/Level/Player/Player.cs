@@ -72,7 +72,6 @@ public class Player : MonoBehaviour
         HandleGravity();
 
         HandleDirection();
-        HandleCamRotation();
         HandleJumping();
 
         HandleQuitting();
@@ -154,13 +153,6 @@ public class Player : MonoBehaviour
         {
             direction = moveInput;
         }
-    }
-
-    // Rotate the camera based on the player's input
-    private void HandleCamRotation()
-    {
-        int rotDir = camRotInputLeft == true ? -1 : camRotInputRight == true ? 1 : 0;
-        controller.camCon.RotateCamera((controller.CameraRotateSpeed * rotDir) * Time.deltaTime);
     }
 
     private void HandleJumping()

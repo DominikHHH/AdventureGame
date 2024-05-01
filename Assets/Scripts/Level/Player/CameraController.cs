@@ -18,13 +18,11 @@ public class CameraController : MonoBehaviour
     // Object references
     Camera cam;
     CinemachineBrain camBrain;
-    CinemachineVirtualCamera currentVirtualCam;
 
     private void Awake()
     {
         cam = Camera.main;
         camBrain = GetComponent<CinemachineBrain>();
-        currentVirtualCam = FindObjectOfType<CinemachineVirtualCamera>().transform.parent.GetComponent<CinemachineVirtualCamera>();
     }
 
     public void ChangeAnchor(int cam_id)
@@ -46,11 +44,5 @@ public class CameraController : MonoBehaviour
     public void ChangeSpeed(float speed)
     {
         camBrain.m_DefaultBlend.m_Time = speed;
-    }
-
-    // Rotate the camera by a set "scale" value
-    public void RotateCamera(float rotScale)
-    {
-        currentVirtualCam.VirtualCameraGameObject.transform.eulerAngles += new Vector3(0, rotScale, 0);
     }
 }

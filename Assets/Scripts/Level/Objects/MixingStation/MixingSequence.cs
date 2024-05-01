@@ -102,7 +102,7 @@ public class MixingSequence : MonoBehaviour
         Player.transform.GetChild(0).rotation = PlayerFinalRot;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         switch (currentMixState)
         {

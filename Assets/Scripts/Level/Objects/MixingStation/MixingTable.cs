@@ -75,6 +75,9 @@ public class MixingTable : MonoBehaviour
         player.enabled = false;
         player.velocity = Vector3.zero;
         player.moveInput = Vector3.zero;
+        player.animator.SetBool("Walking", false);
+        player.animator.SetBool("Running", false);
+        player.animator.SetBool("Jumping", false);
 
         player.controller.charCon.enabled = false;
         player.controller.stateMachine.enabled = false;
